@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Festival 2025 - MusicFestival</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('routes.index') }}">MusicFestival</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.index') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.create_event') }}">Create Event</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.bookings') }}">My Bookings</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.about') }}">About Us</a></li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        {% if current_user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.logout') }}">Logout</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.login') }}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.register') }}">Register</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Event Info & Booking -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- Event Detail -->
+      <div class="col-md-6 mb-4">
+        <h2>Rock Festival 2025</h2>
+        <img src="https://www.queensland.com/content/dam/teq/consumer/global/images/destinations/brisbane/blog-images/2024_BNE_CMCRocks_1.jpg" alt="Rock Festival" class="img-fluid rounded mb-3">
+        <p><strong>Date:</strong> March 25, 2025</p>
+        <p><strong>Time:</strong> 6:00 PM - 11:00 PM</p>
+        <p><strong>Venue:</strong> Riverstage, Brisbane</p>
+        <p>
+          Enjoy an electrifying night of live rock music from top Australian and international bands. Delicious food stalls, interactive light shows, and VIP experiences await you.
+        </p>
+        <p><span class="badge bg-success">Status: Open</span></p>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="col-md-6 mb-4">
+        <h4>Book Your Tickets</h4>
+        <form method="POST">
+          <div class="row mb-2">
+            <div class="col">
+              <input type="text" name="first_name" class="form-control" placeholder="First Name*" required>
+            </div>
+            <div class="col">
+              <input type="text" name="last_name" class="form-control" placeholder="Last Name*" required>
+            </div>
+          </div>
+          <input type="email" name="email" class="form-control mb-2" placeholder="Email*" required>
+          <div class="row mb-2">
+            <div class="col">
+              <label for="tickets" class="form-label">Tickets</label>
+              <select name="tickets" class="form-select" required>
+                <option value="">Select</option>
+                <option>1</option><option>2</option><option>3</option><option>4+</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="type" class="form-label">Type</label>
+              <select name="type" class="form-select" required>
+                <option value="">Select</option>
+                <option>General</option>
+                <option>VIP</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3 w-100">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="mt-5">
+      <h4>Comments</h4>
+      <div class="border p-3 mb-3">
+        <p><strong>Alice:</strong> Amazing performance last year! Can't wait!</p>
+        <p><strong>Jay:</strong> Loved the energy! Definitely booking again.</p>
+      </div>
+      <form method="POST">
+        <textarea name="comment" class="form-control mb-2" rows="3" placeholder="Leave a comment..."></textarea>
+        <button type="submit" class="btn btn-secondary">Post Comment</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <small>© 2025 MusicFestival. All rights reserved.</small>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
